@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>JSON to Apex Converter</title>
+    <link rel="stylesheet" href="index.css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <!-- Theme Toggle -->
+        <!-- <div class="theme-toggle-container">
+            <div class="theme-toggle" id="themeToggle">
+                <div class="theme-toggle-track"></div>
+                <i class="fas fa-sun theme-toggle-icon sun"></i>
+                <i class="fas fa-moon theme-toggle-icon moon"></i>
+            </div>
+        </div>
+
+        <header>
+            <h1>JSON to Apex Converter</h1>
+            <p>Convert JSON to Apex classes and test classes with ease</p>
+        </header> -->
+
+        <div class="header-container">
+            <div style="width: 3.5rem;"></div> <!-- Spacer for alignment -->
+
+            <header>
+                <h1>JSON to Apex Converter</h1>
+                <p>Convert JSON to Apex classes and test classes with ease</p>
+            </header>
+
+            <div class="theme-toggle" id="themeToggle">
+                <div class="theme-toggle-track"></div>
+                <i class="fas fa-sun theme-toggle-icon sun"></i>
+                <i class="fas fa-moon theme-toggle-icon moon"></i>
+            </div>
+        </div>
+        <!-- <header>
+        <h1>JSON to Apex Converter</h1>
+        <button id="themeToggle" title="Toggle Dark/Light Theme">🌓</button>
+    </header> -->
+
+        <main class="main-content">
+            <!-- Input Section -->
+            <section class="section input-section">
+                <h2 class="section-title">
+                    <div class="section-title-text">
+                        <i class="fas fa-code"></i>
+                        Paste Your JSON Here
+                    </div>
+                    <!-- Stats Toggle Button -->
+                    <button class="stats-toggle-btn" id="statsToggleBtn" title="Toggle JSON Stats">
+                        <i class="fas fa-chart-bar"></i>
+                        <span id="statsToggleText">Stats</span>
+                    </button>
+                </h2>
+
+                <div class="form-group">
+                    <div class="json-input-container">
+                        <div id="jsonEditor" class="editor input-field textarea-field"></div>
+
+                        <!-- Floating Action Buttons for JSON Input -->
+                        <div class="floating-actions">
+                            <button class="floating-btn copy-btn" id="copyJsonBtn" title="Copy JSON">
+                                <i class="fas fa-copy"></i>
+                            </button>
+                            <button class="floating-btn format-btn" id="formatJsonBtn" title="Format JSON">
+                                <i class="fas fa-code"></i>
+                            </button>
+                            <button class="floating-btn minify-btn" id="minifyJsonBtn" title="Minify JSON">
+                                <i class="fas fa-compress-alt"></i>
+                            </button>
+                        </div>
+
+                    </div>
+
+                    <!-- JSON Validation Indicator -->
+                    <div class="json-validation empty" id="jsonValidation">
+                        <i class="fas fa-info-circle"></i>
+                        <span>Enter JSON to validate</span>
+                    </div>
+                </div>
+
+                <!-- JSON Stats Section - Enhanced with Header and Categories -->
+                <div class="json-stats-section" id="jsonStatsSection">
+                    <div class="json-stats-header">
+                        <i class="fas fa-chart-pie"></i>
+                        JSON Structure Analysis
+                    </div>
+
+                    <!-- Floating Action Buttons for JSON Input -->
+                    <div class="floating-actions">
+                        <button class="floating-btn copy-btn" id="copyJsonStats" title="Copy JSON Stats">
+                            <i class="fas fa-copy"></i>
+                        </button>
+                    </div>
+
+                    <!-- Structure Stats -->
+                    <div class="stats-category">
+                        <div class="stats-category-title">Structure</div>
+                        <div class="json-stats-grid">
+                            <div class="stat-item">
+                                <i class="fas fa-key stat-icon"></i>
+                                <span class="stat-value" id="keyCount">0</span>
+                                <span class="stat-label">Keys</span>
+                            </div>
+                            <div class="stat-item">
+                                <i class="fas fa-layer-group stat-icon"></i>
+                                <span class="stat-value" id="depthCount">0</span>
+                                <span class="stat-label">Depth</span>
+                            </div>
+                            <div class="stat-item">
+                                <i class="fas fa-cubes stat-icon"></i>
+                                <span class="stat-value" id="objectCount">0</span>
+                                <span class="stat-label">Objects</span>
+                            </div>
+                            <div class="stat-item">
+                                <i class="fas fa-list stat-icon"></i>
+                                <span class="stat-value" id="arrayCount">0</span>
+                                <span class="stat-label">Arrays</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Data Type Stats -->
+                    <div class="stats-category">
+                        <div class="stats-category-title">Data Types</div>
+                        <div class="json-stats-grid">
+                            <div class="stat-item">
+                                <i class="fas fa-font stat-icon"></i>
+                                <span class="stat-value" id="stringCount">0</span>
+                                <span class="stat-label">Strings</span>
+                            </div>
+                            <div class="stat-item">
+                                <i class="fas fa-hashtag stat-icon"></i>
+                                <span class="stat-value" id="numberCount">0</span>
+                                <span class="stat-label">Numbers</span>
+                            </div>
+                            <div class="stat-item">
+                                <i class="fas fa-toggle-on stat-icon"></i>
+                                <span class="stat-value" id="booleanCount">0</span>
+                                <span class="stat-label">Booleans</span>
+                            </div>
+                            <div class="stat-item">
+                                <i class="fas fa-ban stat-icon"></i>
+                                <span class="stat-value" id="nullCount">0</span>
+                                <span class="stat-label">Nulls</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Size Stats -->
+                    <div class="stats-category">
+                        <div class="stats-category-title">Size</div>
+                        <div class="json-stats-grid">
+                            <div class="stat-item">
+                                <i class="fas fa-file-alt stat-icon"></i>
+                                <span class="stat-value" id="charCount">0</span>
+                                <span class="stat-label">Characters</span>
+                            </div>
+                            <div class="stat-item">
+                                <i class="fas fa-weight-hanging stat-icon"></i>
+                                <span class="stat-value" id="byteSize">0</span>
+                                <span class="stat-label">KB</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section-footer">
+                    <button class="btn btn-outline" id="clearJsonBtn">
+                        <i class="fas fa-trash-alt"></i> Clear
+                    </button>
+                    <button class="btn btn-primary" id="convertBtn">
+                        <i class="fas fa-sync-alt"></i> Convert
+                    </button>
+                </div>
+            </section>
+
+            <!-- Output Section -->
+            <section class="section output-section-container">
+                <!-- <h2 class="section-title">
+                    <i class="fas fa-file-code"></i>
+                    Generated Apex Code
+                </h2> -->
+                <h2 class="section-title">
+                    <div class="section-title-text">
+                        <i class="fas fa-file-code"></i>
+                        Generated Apex Code
+                    </div>
+                    <button class="advanced-settings-btn" id="advancedSettingsBtn" title="Advanced Settings">
+                        <i class="fas fa-wand-magic-sparkles"></i>
+                        Power Tools
+                    </button>
+                </h2>
+
+                <!-- Advanced Settings Panel -->
+                <div class="advanced-settings" id="advancedSettings">
+                    <div class="advanced-settings-header">
+                        <i class="fas fa-sliders-h"></i>
+                        Customize Your Code
+                    </div>
+
+                    <div class="form-group">
+                        <label for="classNameInput">Name Your Class</label>
+                        <input type="text" id="classNameInput" class="input-field" placeholder="e.g. MyCustomClass">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="authorName">Add Your Name</label>
+                        <input type="text" id="authorName" class="input-field" placeholder="e.g. John Doe">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="codeEnhancers">Code Enhancers</label>
+                        <div class="code-enhancers">
+                            <div class="checkbox-group">
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="addComments">
+                                    <label for="addComments"><i class="fas fa-comment-dots"></i> Smart Comments</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="addAuraEnabled">
+                                    <label for="addAuraEnabled"><i class="fas fa-bolt"></i> Lightning Ready</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="addToString">
+                                    <label for="addToString"><i class="fas fa-quote-right"></i> JSON Stringify</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="addClone">
+                                    <label for="addClone"><i class="fas fa-copy"></i> Deep Clone</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="addIsEmpty">
+                                    <label for="addIsEmpty"><i class="fas fa-box-open"></i> Empty Check</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="addEquals">
+                                    <label for="addEquals"><i class="fas fa-equals"></i> Equality Magic</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tabs -->
+                <div class="tabs">
+                    <!-- <div class="tab active">Apex Class</div>
+                    <div class="tab">Test Class</div> -->
+                    <div class="tab active">
+                        <i class="fas fa-file-code"></i>
+                        Apex Class
+                    </div>
+                    <div class="tab">
+                        <i class="fas fa-vial"></i>
+                        Test Class
+                    </div>
+                </div>
+
+                <!-- Apex Class Output -->
+                <div class="output-section active">
+                    <div id="mainApexContainer" class="editor-container">
+                        <div class="code-container">
+                            <div id="apexEditor" class="output-editor"></div>
+                            <!-- Floating Action Buttons for Apex Output -->
+                            <div class="floating-actions">
+                                <button class="floating-btn copy-btn" id="copyMainApexBtn" title="Copy Apex Class">
+                                    <i class="fas fa-copy"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Test Class Output -->
+                <div class="output-section">
+                    <div id="testApexContainer" class="editor-container">
+                        <div class="code-container">
+                            <div id="testApexEditor" class="output-editor"></div>
+                            <!-- Floating Action Buttons for Test Output -->
+                            <div class="floating-actions">
+                                <button class="floating-btn copy-btn" id="copyTestClassBtn" title="Copy Test Class">
+                                    <i class="fas fa-copy"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section-footer">
+                    <button class="btn btn-secondary" id="copyBtn">
+                        <i class="fas fa-copy"></i> Copy All
+                    </button>
+                    <button class="btn btn-success" id="downloadBtn">
+                        <i class="fas fa-download"></i> Download
+                    </button>
+                </div>
+            </section>
+            <!-- <section class="panel output-panel">
+                <h2>Generate Apex Class</h2>
+
+                <div id="mainApexContainer" class="editor-container">
+                    <div id="apexEditor" class="output-editor"></div>
+                </div>
+
+                <h2 id="testClassToggle" class="collapsible-header">Test Class ▼</h2>
+
+                <div id="testApexContainer" class="editor-container hidden">
+                    <div id="testApexEditor" class="output-editor"></div>
+                </div>
+            </section> -->
+        </main>
+
+        <!-- Footer with Buttons -->
+        <!-- <footer class="footer">
+            <button class="btn btn-primary" id="convertBtn">
+                <i class="fas fa-sync-alt"></i> Convert
+            </button>
+            <button class="btn btn-success" id="downloadBtn">
+                <i class="fas fa-download"></i> Download
+            </button>
+            <button class="btn btn-secondary" id="copyBtn">
+                <i class="fas fa-copy"></i> Copy All
+            </button>
+        </footer> -->
+    </div>
+
+    <!-- Toast Container (moved to top) -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <script src="libs/jszip/jszip.min.js"></script>
+    <!-- Load Monaco loader -->
+    <script src="libs/monaco/vs/loader.js"></script>
+    <script src="scripts/converter.js"></script>
+    <script type="module" src="index.js"></script>
+</body>
+
+</html>

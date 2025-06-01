@@ -1,0 +1,105 @@
+/* This index.css now only imports the modularized CSS files.
+    The order of imports is important!  Base styles should come first.
+*/
+@import '/style/layout.css';
+@import '/style/forms.css';
+@import '/style/buttons.css';
+@import '/style/theme-toggle.css';
+@import '/style/editor.css';
+@import '/style/json-validation.css';
+@import '/style/footer.css';
+@import '/style/floating-actions.css';
+@import '/style/toasts.css';
+@import '/style/advanced-settings.css';
+@import '/style/checkboxes.css';
+@import '/style/stats.css';
+@import '/style/tabs.css';
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+:root {
+    /* Light Theme Variables */
+    --bg-color: #f0f4f8;
+    --text-color: #334155;
+    --card-bg: #ffffff;
+    --card-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    --border-color: #d1d5db;
+    --primary-color: #3b82f6;
+    --primary-hover: #2563eb;
+    --secondary-color: #8b5cf6;
+    --secondary-hover: #7c3aed;
+    --success-color: #10b981;
+    --success-hover: #059669;
+    --error-color: #ef4444;
+    --error-hover: #dc2626;
+    --warning-color: #f59e0b;
+    --warning-hover: #d97706;
+    --muted-color: #64748b;
+    --code-bg: #1e293b;
+    --code-color: #e2e8f0;
+    --icon-color: #64748b;
+    --icon-hover-bg: #f1f5f9;
+    --floating-btn-bg: rgba(255, 255, 255);
+    --floating-btn-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    --toast-bg: rgba(255, 255, 255, 0.95);
+    --toast-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    --toast-success-border: #10b981;
+    --toast-error-border: #ef4444;
+    --toast-info-border: #3b82f6;
+    --stats-bg: rgba(255, 255, 255, 0.9);
+    --stats-border: #d1d5db;
+}
+
+[data-theme="dark"] {
+    /* Dark Theme Variables */
+    --bg-color: #111827;
+    --text-color: #e2e8f0;
+    --card-bg: #1f2937;
+    --card-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    --border-color: #374151;
+    --primary-color: #3b82f6;
+    --primary-hover: #60a5fa;
+    --secondary-color: #8b5cf6;
+    --secondary-hover: #a78bfa;
+    --success-color: #10b981;
+    --success-hover: #34d399;
+    --error-color: #ef4444;
+    --error-hover: #f87171;
+    --warning-color: #f59e0b;
+    --warning-hover: #fbbf24;
+    --muted-color: #9ca3af;
+    --code-bg: #111827;
+    --code-color: #e2e8f0;
+    --icon-color: #9ca3af;
+    --icon-hover-bg: #374151;
+    --floating-btn-bg: rgba(31, 41, 55, 0.9);
+    --floating-btn-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    --toast-bg: rgba(31, 41, 55, 0.95);
+    --toast-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    --toast-success-border: #10b981;
+    --toast-error-border: #ef4444;
+    --toast-info-border: #3b82f6;
+    --code-block-bg-color: #1e1e1e;
+    --code-block-text-color: #f5f5f5;
+    --stats-bg: rgba(31, 41, 55, 0.9);
+    --stats-border: #374151;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    padding: 1.5rem;
+    min-height: 100vh;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* You can add any global styles or specific overrides that 
+   don't belong in a module here.  Try to keep this file minimal.
+*/

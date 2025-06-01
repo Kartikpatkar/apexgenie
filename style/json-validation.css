@@ -1,0 +1,23 @@
+/* JSON Validation Indicator */
+.json-validation {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    padding: 0.5rem 0;
+    margin-top: 0.5rem;
+    border-radius: 0.25rem;
+    transition: all 0.2s ease;
+}
+
+.json-validation.valid {
+    color: var(--success-color);
+}
+
+.json-validation.invalid {
+    color: var(--error-color);
+}
+
+.json-validation.empty {
+    color: var(--warning-color);
+}

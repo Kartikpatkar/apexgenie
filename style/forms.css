@@ -1,0 +1,36 @@
+/* Form Elements */
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-group label {
+    display: block;
+    font-size: 0.875rem;
+    font-weight: 500;
+    margin-bottom: 0.25rem;
+    color: var(--text-color);
+}
+
+.input-field {
+    width: 100%;
+    padding: 0.625rem 0.75rem;
+    border: 1px solid var(--border-color);
+    border-radius: 0.375rem;
+    font-family: inherit;
+    font-size: 0.875rem;
+    background-color: var(--card-bg);
+    color: var(--text-color);
+    transition: border-color 0.15s ease, background-color 0.3s ease, color 0.3s ease;
+}
+
+.input-field:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.textarea-field {
+    height: 350px;
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+    resize: vertical;
+}

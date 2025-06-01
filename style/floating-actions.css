@@ -1,0 +1,43 @@
+/* Floating Action Buttons */
+.floating-actions {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    z-index: 10;
+}
+
+.floating-btn {
+    width: 2.25rem;
+    height: 2.25rem;
+    border-radius: 0.375rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--floating-btn-bg);
+    box-shadow: var(--floating-btn-shadow);
+    border: 1px solid var(--border-color);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    color: var(--icon-color);
+}
+
+.floating-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    color: var(--primary-color);
+}
+
+.floating-btn.format-btn:hover {
+    color: var(--secondary-color);
+}
+
+.floating-btn.copy-btn:hover {
+    color: var(--success-color);
+}
+
+.floating-btn.minify-btn:hover {
+    color: var(--warning-color);
+}

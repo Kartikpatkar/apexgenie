@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>JSON to Apex Converter</title>
+    <link rel="stylesheet" href="popup.css">
+</head>
+
+<body>
+    <h2>JSON to Apex Converter</h2>
+
+    <textarea id="jsonInput" placeholder="Paste JSON here..."></textarea>
+
+    <div class="mode-toggle">
+        <label><input type="radio" name="mode" value="standard" checked> Standard</label>
+        <label><input type="radio" name="mode" value="enhanced"> Enhanced</label>
+    </div>
+
+    <button id="convertBtn">Convert</button>
+
+    <div id="editor"></div>
+
+    <!-- Monaco Editor Loader (LOCAL) -->
+    <script src="libs/monaco/vs/loader.js"></script>
+    <script type="module" src="monaco-loader.js"></script>
+</body>
+
+</html>

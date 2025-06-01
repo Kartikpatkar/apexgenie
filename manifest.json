@@ -1,0 +1,31 @@
+{
+    "manifest_version": 3,
+    "name": "JSON to Apex Class Converter",
+    "version": "1.0",
+    "description": "Convert JSON to Apex class with test class support.",
+    "permissions": ["unlimitedStorage"],
+    "action": {
+        "default_title": "JSON to Apex Converter",
+        "default_icon": {
+            "128": "assets/logoIcon01.png"
+        }
+    },
+    "icons": {
+        "128": "assets/logoIcon01.png"
+    },
+    "background": {
+        "service_worker": "background.js"
+    },
+    "web_accessible_resources": [{
+        "resources": [
+            "libs/monaco/vs/base/worker/workerMain.js",
+            "libs/monaco/vs/editor/editor.worker.js",
+            "libs/monaco/vs/language/json/json.worker.js"
+        ],
+        "matches": ["<all_urls>"]
+    }],
+    "content_security_policy": {
+        "extension_pages": "script-src 'self'; object-src 'self'; worker-src 'self';"
+        
+    }
+}

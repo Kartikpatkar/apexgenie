@@ -124,4 +124,17 @@ This project is licensed under the MIT License – see the [LICENSE](LICENSE) fi
 > Built for Salesforce developers, by Salesforce developers.  
 > ApexGenie helps you write better Apex, faster!
 
-![ApexGenie Screenshot](assets/screenshots/screenshot01.png)
+## 📸 Screenshots
+
+### 🔹 JSON Input & Apex Output
+
+![Editor Screenshot](assets/screenshots/screenshot-editor.png)
+
+### 🔹 Code Customization Options
+
+![Customization Screenshot](assets/screenshots/screenshot-customization.png)
+
+### 🔹 Dark Mode UI
+
+![Dark Mode Screenshot](assets/screenshots/screenshot-darkmode.png)
+

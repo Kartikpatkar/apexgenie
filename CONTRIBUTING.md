@@ -43,7 +43,7 @@ We accept pull requests for:
 To set up the project locally:
 
 ```bash
-git clone https://github.com/your-username/apexgenie.git
+git clone https://github.com/Kartikpatkar/apexgenie.git
 cd apexgenie
 npm install
 npm run dev

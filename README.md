@@ -1,7 +1,7 @@
 # ApexGenie – JSON to Apex Converter for Salesforce Developers 🧙‍♂️
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)  
-[![Version](https://img.shields.io/badge/Version-1.0.0-blue.svg)](https://github.com/Kartikpatkar/apex-genie) 
+[![Version](https://img.shields.io/badge/Version-1.0.0-blue.svg)](https://github.com/Kartikpatkar/apexgenie) 
 
 **Coming soon to the [Chrome Web Store](#)** 🚀
 <!-- Update with real link once published -->

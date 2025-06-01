@@ -54,10 +54,6 @@ Once published, replace the above with:
 
 ### 🔧 Option 2: Load ApexGenie Manually in Chrome
 
-Until it's published, you can install and use ApexGenie by loading it manually:
-
-### 🔧 Option 2: Load ApexGenie Manually in Chrome
-
 Until it's available in the Chrome Web Store, you can load ApexGenie manually for development or testing:
 
 1. **Clone or Download this Repository:**

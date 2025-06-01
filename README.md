@@ -124,4 +124,4 @@ This project is licensed under the MIT License – see the [LICENSE](LICENSE) fi
 > Built for Salesforce developers, by Salesforce developers.  
 > ApexGenie helps you write better Apex, faster!
 
-![ApexGenie Screenshot](assets/screenshot.png)
+![ApexGenie Screenshot](assets/screenshot/screenshot01.png)

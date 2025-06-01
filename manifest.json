@@ -7,11 +7,11 @@
     "action": {
         "default_title": "ApexGenie: JSON to Apex Converter for Salesforce Developers",
         "default_icon": {
-            "128": "assets/logoIcon.png"
+            "128": "assets/icons/logoIcon.png"
         }
     },
     "icons": {
-        "128": "assets/logoIcon.png"
+        "128": "assets/icons/logoIcon.png"
     },
     "background": {
         "service_worker": "background.js"

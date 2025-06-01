@@ -1,17 +1,17 @@
 {
     "manifest_version": 3,
-    "name": "JSON to Apex Class Converter",
+    "name": "ApexGenie: JSON to Apex Converter",
     "version": "1.0",
-    "description": "Convert JSON to Apex class with test class support.",
+    "description": "Instantly convert JSON into clean Apex wrapper & test classes. Boost Salesforce dev productivity with ApexGenie Chrome Extension!",
     "permissions": ["unlimitedStorage"],
     "action": {
-        "default_title": "JSON to Apex Converter",
+        "default_title": "ApexGenie: JSON to Apex Converter for Salesforce Developers",
         "default_icon": {
-            "128": "assets/logoIcon01.png"
+            "128": "assets/logoIcon.png"
         }
     },
     "icons": {
-        "128": "assets/logoIcon01.png"
+        "128": "assets/logoIcon.png"
     },
     "background": {
         "service_worker": "background.js"

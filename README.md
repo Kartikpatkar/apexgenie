@@ -1,8 +1,13 @@
 # ApexGenie – JSON to Apex Converter for Salesforce Developers 🧙‍♂️
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)  
-[![Version](https://img.shields.io/badge/Version-1.0.0-blue.svg)](https://github.com/your-username/apex-genie)  
+[![Version](https://img.shields.io/badge/Version-1.0.0-blue.svg)](https://github.com/Kartikpatkar/apex-genie) 
+
+**Coming soon to the [Chrome Web Store](#)** 🚀
+<!-- Update with real link once published -->
+<!--
 [![Chrome Web Store](https://img.shields.io/chrome-web-store/v/your-extension-id.svg?label=Chrome%20Web%20Store)](https://chrome.google.com/webstore/detail/your-extension-id)
+-->
 
 Transform your JSON into Salesforce-ready Apex classes and comprehensive test classes instantly with ApexGenie!
 
@@ -38,9 +43,49 @@ ApexGenie is a powerful Chrome Extension designed specifically for Salesforce de
 
 ## 📦 Installation
 
-1. Visit the [Chrome Web Store ApexGenie page](https://chrome.google.com/webstore/detail/your-extension-id).  
-2. Click **Add to Chrome** and confirm installation.  
-3. The ApexGenie icon will appear in your Chrome toolbar.
+### ✅ Option 1: [Chrome Web Store (Coming Soon)](#)
+
+> Stay tuned! ApexGenie will soon be available on the Chrome Web Store for one-click installation.
+
+<!--
+Once published, replace the above with:
+[Install from Chrome Web Store](https://chrome.google.com/webstore/detail/your-extension-id)
+-->
+
+### 🔧 Option 2: Load ApexGenie Manually in Chrome
+
+Until it's published, you can install and use ApexGenie by loading it manually:
+
+### 🔧 Option 2: Load ApexGenie Manually in Chrome
+
+Until it's available in the Chrome Web Store, you can load ApexGenie manually for development or testing:
+
+1. **Clone or Download this Repository:**
+
+   ```bash
+   git clone https://github.com/Kartikpatkar/apexgenie.git
+   ```
+
+   Or download the ZIP from GitHub and extract it.
+
+2. **Open Chrome and go to the Extensions page:**
+
+   ```
+   chrome://extensions/
+   ```
+
+3. **Enable Developer Mode:**
+
+   Toggle the **Developer mode** switch in the top right corner.
+
+4. **Click "Load unpacked":**
+
+   - Select the root folder of the project (the one containing `manifest.json`).
+
+5. **Done!**
+
+   - You’ll now see ApexGenie in your extensions bar.
+   - Click the icon to launch and start generating Apex!
 
 ---
 

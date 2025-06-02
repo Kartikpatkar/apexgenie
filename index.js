@@ -46,7 +46,7 @@ require(['vs/editor/editor.main'], function () {
 
     // Trigger convert when class name changes and JSON is valid
     apexClassNameInput.addEventListener('input', () => {
-        if (validateJson()) {
+        if (validateJson(window.jsonInput)) {
             convertJsonToApex(true);
         }
     });
@@ -55,7 +55,7 @@ require(['vs/editor/editor.main'], function () {
     authorNameInput.setAttribute('value', authorName);
 
     authorNameInput.addEventListener('input', () => {
-        if (validateJson()) {
+        if (validateJson(window.jsonInput)) {
             convertJsonToApex(true);
         }
     });
@@ -114,7 +114,7 @@ require(['vs/editor/editor.main'], function () {
         const el = document.getElementById(id);
         if (el) {
             el.addEventListener('input', () => {
-                if (validateJson()) {
+                if (validateJson(window.jsonInput)) {
                     convertJsonToApex(true);
                 }
             });
@@ -240,7 +240,7 @@ require(['vs/editor/editor.main'], function () {
             return;
         }
         window.jsonInput.setValue('');
-        validateJson();
+        validateJson(window.jsonInput);
 
         // Add a small animation to indicate clearing
         clearJsonBtn.classList.add('active');
@@ -263,7 +263,7 @@ require(['vs/editor/editor.main'], function () {
             const parsed = JSON.parse(json);
             const jsonMinify = JSON.stringify(parsed);
             window.jsonInput.setValue(jsonMinify);
-            validateJson();
+            validateJson(window.jsonInput);
 
             // Add a small animation to indicate minifying
             const originalIcon = minifyJsonBtn.innerHTML;
@@ -275,7 +275,7 @@ require(['vs/editor/editor.main'], function () {
             showToast('JSON Minified', 'Your JSON is now compact and ready to go', 'success');
         } catch (e) {
             // If JSON is invalid, validation will show the error
-            validateJson();
+            validateJson(window.jsonInput);
             showToast('Invalid JSON', e.message, 'error');
         }
     });

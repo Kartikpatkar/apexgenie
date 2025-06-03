@@ -1,119 +1,175 @@
+// Enhanced JSON to Apex Generator with better type inference
 function jsonToApex(json, rootClassName = 'MyCustomClass', authorName = 'Your Name') {
-    const addAuraEnabled = document.getElementById('addAuraEnabled')?.checked;
-    const addToString = document.getElementById('addToString')?.checked;
-    const addClone = document.getElementById('addClone')?.checked;
-    const addIsEmpty = document.getElementById('addIsEmpty')?.checked;
-    const addEquals = document.getElementById('addEquals')?.checked;
-    const addComments = document.getElementById('addComments')?.checked;
+    // UI option toggles with default fallback to false
+    const addAuraEnabled = document.getElementById('addAuraEnabled')?.checked || false;
+    const addToString = document.getElementById('addToString')?.checked || false;
+    const addClone = document.getElementById('addClone')?.checked || false;
+    const addIsEmpty = document.getElementById('addIsEmpty')?.checked || false;
+    const addEquals = document.getElementById('addEquals')?.checked || false;
+    const addComments = document.getElementById('addComments')?.checked || false;
 
+    // Capitalize first letter for class names
     function capitalize(str) {
         return str.charAt(0).toUpperCase() + str.slice(1);
     }
 
-    // Holds nested classes: {name: string, body: string}
-    const nestedClasses = [];
-
-    // Generate fields string for a given object
-    // if isNested=true, include @AuraEnabled for fields only if selected,
-    // otherwise also include @AuraEnabled on nested class declarations and root class fields
-    function generateFields(obj, isNested = false) {
-        return Object.entries(obj).map(([key, val]) => {
-            let type;
-            if (val === null) {
-                type = 'Object';
-            } else if (Array.isArray(val)) {
-                if (val.length > 0 && typeof val[0] === 'object') {
-                    type = `List<${capitalize(key)}>`;
-                } else {
-                    type = 'List<Object>';
-                }
-            } else {
-                switch (typeof val) {
-                    case 'string': type = 'String'; break;
-                    case 'number': type = 'Decimal'; break;
-                    case 'boolean': type = 'Boolean'; break;
-                    case 'object': type = capitalize(key); break;
-                    default: type = 'Object';
-                }
-            }
-
-            // Field-level @AuraEnabled if selected
-            const aura = addAuraEnabled ? '@AuraEnabled ' : '';
-            return `${aura}public ${type} ${key} { get; set; }`;
-        }).join('\n        ');
+    // Detect ISO 8601 date string (very common format)
+    function isIsoDateString(value) {
+        return typeof value === 'string' &&
+            /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?Z$/.test(value);
     }
 
-    // Recursively generate nested classes from JSON object
+    // Infer Apex type from JS value and key context
+    function inferApexType(val, key) {
+        if (val === null) return 'Object';
+
+        if (isIsoDateString(val)) return 'DateTime';
+
+        if (Array.isArray(val)) {
+            if (val.length === 0) {
+                // Empty array - fallback to List<Object> with comment in generated code
+                return 'List<Object>';
+            }
+
+            const firstType = inferApexType(val[0], key);
+
+            // Array of primitives
+            if (['String', 'Integer', 'Decimal', 'Boolean', 'DateTime'].includes(firstType)) {
+                return `List<${firstType}>`;
+            }
+
+            // Array of complex objects → List<NestedClass>
+            return `List<${capitalize(key)}>`;
+        }
+
+        switch (typeof val) {
+            case 'string': return 'String';
+            case 'number':
+                // Distinguish Integer vs Decimal
+                return Number.isInteger(val) ? 'Integer' : 'Decimal';
+            case 'boolean': return 'Boolean';
+            case 'object': return capitalize(key);
+            default: return 'Object';
+        }
+    }
+
+    // Store nested classes with structure signature to avoid duplicates
+    const nestedClasses = [];
+
+    /**
+     * Generates a unique signature for object structure to detect duplicates
+     * Signature = sorted keys joined by comma, helps to detect if two nested classes have same shape
+     */
+    function getObjectSignature(obj) {
+        if (typeof obj !== 'object' || obj === null) return '';
+        return Object.keys(obj).sort().join(',');
+    }
+
+    /**
+     * Recursively generates nested classes from JSON object.
+     * Uses signatures to avoid duplicate nested classes of same structure.
+     */
     function generateNestedClasses(obj) {
         for (const key in obj) {
             const val = obj[key];
             if (val === null) continue;
 
-            if (Array.isArray(val) && val.length > 0 && typeof val[0] === 'object') {
-                const className = capitalize(key);
-                if (!nestedClasses.find(c => c.name === className)) {
-                    generateNestedClasses(val[0]);
-                    const body = generateFields(val[0], true);
-                    nestedClasses.push({
-                        name: className,
-                        body,
-                    });
+            if (Array.isArray(val) && val.length > 0) {
+                const firstType = inferApexType(val[0], key);
+
+                if (firstType === capitalize(key)) {
+                    const sig = getObjectSignature(val[0]);
+                    if (!nestedClasses.some(c => c.name === capitalize(key) && c.signature === sig)) {
+                        generateNestedClasses(val[0]);
+                        const body = generateFields(val[0], true);
+                        nestedClasses.push({ name: capitalize(key), body, signature: sig });
+                    }
                 }
             } else if (typeof val === 'object') {
                 const className = capitalize(key);
-                if (!nestedClasses.find(c => c.name === className)) {
+                const sig = getObjectSignature(val);
+                if (!nestedClasses.some(c => c.name === className && c.signature === sig)) {
                     generateNestedClasses(val);
                     const body = generateFields(val, true);
-                    nestedClasses.push({
-                        name: className,
-                        body,
-                    });
+                    nestedClasses.push({ name: className, body, signature: sig });
                 }
             }
         }
     }
 
-    generateNestedClasses(json);
+    /**
+     * Generate Apex fields for a given object.
+     * Also triggers nested class generation for nested objects and arrays of objects.
+     */
+    function generateFields(obj, isNested = false) {
+        return Object.entries(obj).map(([key, val]) => {
+            const type = inferApexType(val, key);
 
-    // Generate root class fields: primitive types + nested object fields with nested class types
-    // For nested object fields, use the nested class name as type, include @AuraEnabled if selected
+            // For nested class types, ensure the nested class is generated
+            if (type === capitalize(key)) {
+                // Nested class already generated in generateNestedClasses, no duplicate here
+            } else if (type.startsWith('List<') && val.length > 0 && typeof val[0] === 'object') {
+                // Nested class inside list
+                // Already handled in generateNestedClasses
+            }
+
+            const aura = addAuraEnabled ? '@AuraEnabled ' : '';
+
+            // Add comment for empty list fields to clarify fallback type
+            if (type === 'List<Object>') {
+                const comment = addComments ? ' // WARNING: empty list - defaulted to List<Object>' : '';
+                return `${aura}public ${type} ${key} { get; set; }${comment}`;
+            }
+
+            return `${aura}public ${type} ${key} { get; set; }`;
+        }).join('\n        ');
+    }
+
+    /**
+     * Generate fields for root class without nested class generation,
+     * since nested classes are generated separately.
+     */
     function generateRootFields(obj) {
         return Object.entries(obj).map(([key, val]) => {
-            let type;
-            if (val === null) {
-                type = 'Object';
-            } else if (Array.isArray(val)) {
-                if (val.length > 0 && typeof val[0] === 'object') {
-                    type = `List<${capitalize(key)}>`;
-                } else {
-                    type = 'List<Object>';
-                }
-            } else {
-                switch (typeof val) {
-                    case 'string': type = 'String'; break;
-                    case 'number': type = 'Decimal'; break;
-                    case 'boolean': type = 'Boolean'; break;
-                    case 'object': type = capitalize(key); break;
-                    default: type = 'Object';
-                }
-            }
+            const type = inferApexType(val, key);
             const aura = addAuraEnabled ? '@AuraEnabled ' : '';
+
+            if (type === 'List<Object>') {
+                const comment = addComments ? ' // WARNING: empty list - defaulted to List<Object>' : '';
+                return `${aura}public ${type} ${key} { get; set; }${comment}`;
+            }
+
             return `${aura}public ${type} ${key} { get; set; }`;
         }).join('\n    ');
     }
 
+    // Generate nested classes first (populates nestedClasses array)
+    generateNestedClasses(json);
+
+    // Compose nested classes code
     const nestedClassCode = nestedClasses.map(cls =>
         `    public class ${cls.name} {\n        ${cls.body}\n    }`
-    ).join('\n');
+    ).join('\n\n');
 
+    // Generate root fields
     const rootFields = generateRootFields(json);
 
-    function generateComment(description) {
-        return addComments ? `/**\n * ${description}\n */` : '';
+    // Helper to generate comment blocks
+    function generateComment(text) {
+        return addComments ? `/**\n * ${text}\n */` : '';
     }
 
+    // Add hashCode method (compatible with equals using JSON serialization)
+    const hashCodeMethod = `
+${generateComment('Generates hash code from JSON serialization')}
+public Integer hashCode() {
+    return serialize() != null ? serialize().hashCode() : 0;
+}
+`;
+
+    // Compose utility methods with conditional generation
     const utilityMethodsParts = [
-        `${generateComment('Parses the JSON string and returns an instance of the class')}
+        `${generateComment('Parses JSON string to this class')}
 public static ${rootClassName} parse(String json) {
     try {
         return (${rootClassName}) System.JSON.deserialize(json, ${rootClassName}.class);
@@ -123,7 +179,7 @@ public static ${rootClassName} parse(String json) {
     }
 }
 
-${generateComment('Serializes the current instance to a JSON string')}
+${generateComment('Serializes this instance to JSON string')}
 public String serialize() {
     try {
         return System.JSON.serialize(this);
@@ -134,65 +190,54 @@ public String serialize() {
 }
 
 public class JSONException extends Exception {}`,
-
-        addEquals ? `${generateComment('Checks equality by comparing JSON serialization')}
+        addEquals ? `
+${generateComment('Compares equality by JSON serialization')}
 public Boolean equals(Object obj) {
     return obj != null && obj instanceof ${rootClassName} &&
         this.serialize() == ((${rootClassName})obj).serialize();
-}` : '',
+}
 
-        addClone ? `${generateComment('Creates a deep clone of the current instance')}
+${hashCodeMethod}
+` : '',
+        addClone ? `
+${generateComment('Creates deep clone of this instance')}
 public ${rootClassName} clone() {
     return parse(serialize());
 }` : '',
-
-        addIsEmpty ? `${generateComment('Checks if the serialized JSON is empty')}
+        addIsEmpty ? `
+${generateComment('Checks if JSON serialization is empty')}
 public Boolean isEmpty() {
     return serialize() == '{}' || serialize() == null;
 }` : '',
-
-        addToString ? `${generateComment('Returns the JSON serialization as a string representation')}
+        addToString ? `
+${generateComment('Returns JSON string representation')}
 public String toString() {
     return serialize();
 }` : '',
     ];
 
-    const utilityMethods = utilityMethodsParts
-        .map(part => part.trim())
-        .filter(Boolean)
-        .join('\n\n');
+    const utilityMethods = utilityMethodsParts.filter(Boolean).join('\n\n');
 
-
+    // Header comment block for the class
     const commentHeader = addComments
         ? `/**
  * This class is auto-generated from JSON
 ${authorName ? ` * Author: ${authorName}` : ''}
- */\n`
+ */
+`
         : '';
 
+    // Compose full class source code
+    const rootClass = `${commentHeader}public class ${rootClassName} {
 
-    const rootClass = `${commentHeader}public class ${rootClassName} {\n\n${nestedClassCode}\n\n    ${rootFields}\n\n${utilityMethods.trim().replace(/^/gm, '    ')}\n}`;
+${nestedClassCode}
+
+    ${rootFields}
+
+${utilityMethods.replace(/^/gm, '    ')}
+}`;
 
     return rootClass;
-}
-
-function generateTestClass(mainClassName = 'GeneratedClass', originalJson = '{}') {
-    const rawJson = typeof originalJson === 'string' ? originalJson.trim() : JSON.stringify(originalJson);
-
-    const escapedJson = rawJson
-        .replace(/\\/g, '\\\\')   // escape backslashes
-        .replace(/"/g, '\\"')     // escape double quotes
-        .replace(/\r?\n/g, '\\n'); // escape newlines
-
-    return `@isTest
-public class ${mainClassName}Test {
-    @isTest
-    static void testFromJson() {
-        String jsonInput = "${escapedJson}";
-        ${mainClassName} obj = (${mainClassName})JSON.deserialize(jsonInput, ${mainClassName}.class);
-        System.assertNotEquals(null, obj);
-    }
-}`;
 }
 
 function generateTestClass(mainClassName = 'GeneratedClass', originalJson = '{}', authorName = '', options = {}) {
@@ -205,6 +250,7 @@ function generateTestClass(mainClassName = 'GeneratedClass', originalJson = '{}'
 
     const rawJson = typeof originalJson === 'string' ? originalJson.trim() : JSON.stringify(originalJson, null, 2);
 
+    // Escape JSON string for use in Apex test class
     const escapedJson = rawJson
         .replace(/\\/g, '\\\\')
         .replace(/"/g, '\\"')
@@ -212,19 +258,16 @@ function generateTestClass(mainClassName = 'GeneratedClass', originalJson = '{}'
 
     const classComment = addComments
         ? `/**
- * This is a test class for ${mainClassName}
-${authorName ? ` * Author: ${authorName}\n` : ''} * Auto-generated by the JSON to Apex tool
+ * Test class for ${mainClassName}
+${authorName ? ` * Author: ${authorName}\n` : ''} * Auto-generated by JSON-to-Apex tool
  */\n`
         : '';
 
-    function methodComment(text) {
-        return addComments ? `    /**
-     * ${text}
-     */\n` : '';
-    }
+    const methodComment = (text) =>
+        addComments ? `    /**\n     * ${text}\n     */\n` : '';
 
     let methods = `
-${methodComment(`Tests deserialization from JSON to ${mainClassName}`)}    @isTest
+${methodComment('Test JSON deserialization')}    @isTest
     static void testFromJson() {
         String jsonInput = "${escapedJson}";
         ${mainClassName} obj = (${mainClassName})JSON.deserialize(jsonInput, ${mainClassName}.class);
@@ -234,7 +277,7 @@ ${methodComment(`Tests deserialization from JSON to ${mainClassName}`)}    @isTe
 
     if (addToString) {
         methods += `
-${methodComment(`Tests the toString method of ${mainClassName}`)}    @isTest
+${methodComment('Test toString method')}    @isTest
     static void testToString() {
         ${mainClassName} obj = new ${mainClassName}();
         System.assertNotEquals(null, obj.toString());
@@ -244,7 +287,7 @@ ${methodComment(`Tests the toString method of ${mainClassName}`)}    @isTest
 
     if (addClone) {
         methods += `
-${methodComment(`Tests the clone method of ${mainClassName}`)}    @isTest
+${methodComment('Test clone method')}    @isTest
     static void testClone() {
         ${mainClassName} obj = new ${mainClassName}();
         ${mainClassName} clone = obj.clone();
@@ -256,7 +299,7 @@ ${methodComment(`Tests the clone method of ${mainClassName}`)}    @isTest
 
     if (addIsEmpty) {
         methods += `
-${methodComment(`Tests the isEmpty method of ${mainClassName}`)}    @isTest
+${methodComment('Test isEmpty method')}    @isTest
     static void testIsEmpty() {
         ${mainClassName} obj = new ${mainClassName}();
         System.assertEquals(true, obj.isEmpty());
@@ -265,8 +308,8 @@ ${methodComment(`Tests the isEmpty method of ${mainClassName}`)}    @isTest
     }
 
     if (addEquals) {
-    methods += `
-${methodComment(`Tests the equals and hashCode methods of ${mainClassName}`)}    @isTest
+        methods += `
+${methodComment('Test equals/hashCode')}    @isTest
     static void testEqualsAndHashCode() {
         ${mainClassName} a = new ${mainClassName}();
         ${mainClassName} b = new ${mainClassName}();
@@ -274,11 +317,11 @@ ${methodComment(`Tests the equals and hashCode methods of ${mainClassName}`)}   
         System.assertEquals(a.hashCode(), b.hashCode());
     }
 `;
-}
+    }
 
     if (addAuraEnabled) {
         methods += `
-${methodComment(`Tests serialization of ${mainClassName} using JSON for Aura compatibility`)}    @isTest
+${methodComment('Test Aura-safe serialization')}    @isTest
     static void testAuraSerialization() {
         ${mainClassName} obj = new ${mainClassName}();
         String serialized = JSON.serialize(obj);
@@ -291,7 +334,6 @@ ${methodComment(`Tests serialization of ${mainClassName} using JSON for Aura com
 public class ${mainClassName}Test {${methods}
 }`;
 }
-
 
 // Expose globally
 window.jsonToApex = jsonToApex;

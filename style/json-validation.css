@@ -1,23 +1,26 @@
-/* JSON Validation Indicator */
+/* JSON Validation Message Styles */
 .json-validation {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-size: 0.875rem;
-    padding: 0.5rem 0;
-    margin-top: 0.5rem;
-    border-radius: 0.25rem;
-    transition: all 0.2s ease;
+    display: flex;              /* Puts icon and text next to each other in a row */
+    align-items: center;        /* Vertically centers the items */
+    gap: 0.5rem;                /* Adds space between the icon and the text */
+    font-size: 0.875rem;        /* Sets the text size a little smaller than normal */
+    padding: 0.5rem 0;          /* Adds space above and below the content */
+    margin-top: 0.5rem;         /* Adds space above this box */
+    border-radius: 0.25rem;     /* Rounds the corners slightly */
+    transition: all 0.2s ease;  /* Animates any change smoothly */
 }
 
+/* Green text if the JSON is valid */
 .json-validation.valid {
-    color: var(--success-color);
+    color: var(--success-color); 
 }
 
+/* Red text if the JSON is invalid */
 .json-validation.invalid {
     color: var(--error-color);
 }
 
+/* Yellow/orange text if the input is empty */
 .json-validation.empty {
     color: var(--warning-color);
 }

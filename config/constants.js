@@ -49,3 +49,15 @@ export const UI_TEXTS = {
     invalidJson: 'The JSON provided is not valid.',
 };
 
+export const AUTHOR = {
+    name: "Kartik Patkar",
+    github: "https://github.com/Kartikpatkar/apexgenie",
+    linkedin: "https://www.linkedin.com/in/kartik-patkar",
+    trailhead: "https://www.salesforce.com/trailblazer/kpatkar1",
+    email: "kartikkp.assets@gmail.com",
+};
+
+export const TITLE = 'ApexGenie - JSON to Apex Converter';
+export const SUBTITLE = 'Convert JSON to Apex classes and test classes with ease';
+export const TAGLINE = 'A powerful tool to convert JSON to Salesforce Apex classes with ease. Save time and focus on building amazing applications.';
+export const COPYRIGHT = 'ApexGenie - JSON to Apex Converter for Salesforce Developers. All rights reserved.';

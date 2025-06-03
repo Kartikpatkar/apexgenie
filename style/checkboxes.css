@@ -1,54 +1,61 @@
-/* Checkbox Group */
+/* Container for the group of checkboxes */
 .checkbox-group {
-    display: grid;
+    display: grid; /* Use grid layout */
+    /* Automatically create as many columns as fit, each at least 180px wide */
     grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-    gap: 0.75rem;
+    gap: 0.75rem; /* Space between each checkbox item */
 }
 
+/* Each checkbox item and its label aligned horizontally */
 .checkbox-item {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
+    display: flex;           /* Use flexbox for layout */
+    align-items: center;     /* Vertically center checkbox and label */
+    gap: 0.5rem;             /* Space between checkbox and label */
 }
 
+/* Style for the checkbox input itself */
 .checkbox-item input[type="checkbox"] {
-    width: 1rem;
-    height: 1rem;
-    border-radius: 0.25rem;
-    border: 1px solid var(--border-color);
-    background-color: var(--card-bg);
-    cursor: pointer;
-    appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    position: relative;
-    transition: all 0.2s ease;
+    width: 1rem;             /* Width of checkbox */
+    height: 1rem;            /* Height of checkbox */
+    border-radius: 0.25rem;  /* Rounded corners */
+    border: 1px solid var(--border-color); /* Border color */
+    background-color: var(--card-bg);       /* Background color */
+    cursor: pointer;         /* Pointer cursor on hover */
+    appearance: none;        /* Remove default browser checkbox style */
+    -webkit-appearance: none; /* For Safari */
+    -moz-appearance: none;    /* For Firefox */
+    position: relative;       /* To position the checkmark inside */
+    transition: all 0.2s ease; /* Smooth transition for changes */
 }
 
+/* When checkbox is checked */
 .checkbox-item input[type="checkbox"]:checked {
-    background-color: var(--primary-color);
-    border-color: var(--primary-color);
+    background-color: var(--primary-color); /* Fill with primary color */
+    border-color: var(--primary-color);     /* Change border to match */
 }
 
+/* Add checkmark symbol inside checked checkbox */
 .checkbox-item input[type="checkbox"]:checked::after {
-    content: '✓';
-    position: absolute;
-    color: white;
-    font-size: 0.75rem;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    content: '✓';            /* Checkmark symbol */
+    position: absolute;      /* Position relative to checkbox */
+    color: white;            /* White color for checkmark */
+    font-size: 0.75rem;      /* Smaller font size */
+    top: 50%;                /* Center vertically */
+    left: 50%;               /* Center horizontally */
+    transform: translate(-50%, -50%); /* Perfect center */
 }
 
+/* Label text next to checkbox */
 .checkbox-item label {
-    font-size: 0.875rem;
-    cursor: pointer;
-    user-select: none;
-    display: inline;
-    margin-bottom: 0;
+    font-size: 0.875rem;     /* Slightly smaller font */
+    cursor: pointer;         /* Pointer cursor on hover */
+    user-select: none;       /* Prevent text selection when clicking */
+    display: inline;         /* Inline display */
+    margin-bottom: 0;        /* Remove default margin */
 }
 
+/* Optional icon color inside checkbox item */
 .checkbox-item i {
-    color: var(--primary-color);
-    margin-right: 0.25rem;
+    color: var(--primary-color); /* Primary color for icon */
+    margin-right: 0.25rem;        /* Small space after icon */
 }

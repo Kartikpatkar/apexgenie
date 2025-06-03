@@ -1,55 +1,62 @@
-/* Theme Toggle */
+/* Container that holds the theme toggle and aligns it to the right */
 .theme-toggle-container {
-    display: flex;
-    justify-content: flex-end;
-    margin-bottom: 1rem;
+    display: flex;                 /* Arrange children in a row */
+    justify-content: flex-end;    /* Push toggle to the right */
+    margin-bottom: 1rem;          /* Space below the container */
 }
 
+/* Toggle switch appearance */
 .theme-toggle {
-    background-color: var(--card-bg);
-    border: 1px solid var(--border-color);
-    border-radius: 1.5rem;
-    width: 3.5rem;
-    height: 1.75rem;
-    position: relative;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    padding: 0.25rem;
-    transition: background-color 0.3s ease;
+    background-color: var(--card-bg);        /* Background of the toggle */
+    border: 1px solid var(--border-color);   /* Border for clarity */
+    border-radius: 1.5rem;                   /* Make it pill-shaped */
+    width: 3.5rem;                           /* Width of toggle */
+    height: 1.75rem;                         /* Height of toggle */
+    position: relative;                      /* Needed for inner positioning */
+    cursor: pointer;                         /* Show pointer on hover */
+    display: flex;                           /* Aligns icons inside */
+    align-items: center;                     /* Vertically center icons */
+    padding: 0.25rem;                        /* Inner spacing */
+    transition: background-color 0.3s ease;  /* Smooth background color change */
 }
 
+/* The small circle that slides left/right inside the toggle */
 .theme-toggle-track {
     position: absolute;
     top: 0.25rem;
     left: 0.25rem;
     width: 1.25rem;
     height: 1.25rem;
-    border-radius: 50%;
-    background-color: var(--primary-color);
-    transition: transform 0.3s ease;
+    border-radius: 50%;                     /* Make it a perfect circle */
+    background-color: var(--primary-color); /* Color of the slider */
+    transition: transform 0.3s ease;        /* Smooth sliding animation */
 }
 
+/* When the theme is dark, slide the toggle circle to the right */
 [data-theme="dark"] .theme-toggle-track {
-    transform: translateX(1.75rem);
+    transform: translateX(1.75rem);         /* Move it right */
 }
 
+/* Shared styles for both sun and moon icons */
 .theme-toggle-icon {
     position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    color: var(--card-bg);
-    font-size: 0.75rem;
+    top: 50%;                      /* Center vertically */
+    transform: translateY(-50%);   /* Adjust to exact middle */
+    color: var(--card-bg);         /* Icon color contrasts toggle background */
+    font-size: 0.75rem;            /* Small icon size */
 }
 
+/* Position the sun icon on the left side of the toggle */
 .theme-toggle-icon.sun {
     left: 0.5rem;
 }
 
+/* Position the moon icon on the right side of the toggle */
 .theme-toggle-icon.moon {
     right: 0.5rem;
 }
 
+/* Responsive tweak: add top margin on small screens */
 @media (max-width: 640px) {
     .theme-toggle {
         margin-top: 0.5rem;

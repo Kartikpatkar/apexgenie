@@ -1,41 +1,47 @@
-/* Toast Notifications */
+/* Container that holds all toast notifications */
 .toast-container {
-    position: fixed;
-    top: 1.5rem;
-    right: 1.5rem;
-    display: flex;
+    position: fixed;                 /* Stays in place when scrolling */
+    top: 1.5rem;                     /* Distance from top of screen */
+    right: 1.5rem;                   /* Distance from right side */
+    display: flex;                  /* Stack toasts vertically */
     flex-direction: column;
-    gap: 0.75rem;
-    z-index: 1000;
-    max-width: 24rem;
+    gap: 0.75rem;                   /* Space between toasts */
+    z-index: 1000;                  /* Show above other content */
+    max-width: 24rem;               /* Limit width of the container */
 }
 
+/* Each individual toast box */
 .toast {
-    background-color: var(--toast-bg);
-    border-radius: 0.5rem;
-    box-shadow: var(--toast-shadow);
-    padding: 1rem;
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    animation: slideInRight 0.3s ease, fadeOut 0.3s ease 2.7s forwards;
-    border-left: 4px solid var(--toast-info-border);
-    min-width: 18rem;
+    background-color: var(--toast-bg);       /* Background color (based on theme) */
+    border-radius: 0.5rem;                   /* Rounded corners */
+    box-shadow: var(--toast-shadow);         /* Subtle shadow for depth */
+    padding: 1rem;                           /* Inner spacing */
+    display: flex;                           /* Arrange icon and text side-by-side */
+    align-items: center;                     /* Vertically center content */
+    gap: 0.75rem;                            /* Space between icon and text */
+    animation: slideInRight 0.3s ease,       /* Slide in animation */
+               fadeOut 0.3s ease 2.7s forwards; /* Fade out after 2.7s */
+    border-left: 4px solid var(--toast-info-border); /* Colored bar on the left */
+    min-width: 18rem;                        /* Prevent it from being too narrow */
 }
 
+/* Toast for success messages (green bar) */
 .toast.success {
     border-left-color: var(--toast-success-border);
 }
 
+/* Toast for error messages (red bar) */
 .toast.error {
     border-left-color: var(--toast-error-border);
 }
 
+/* Icon inside the toast */
 .toast-icon {
     font-size: 1.25rem;
-    flex-shrink: 0;
+    flex-shrink: 0;                          /* Prevent icon from shrinking */
 }
 
+/* Color the icon based on the type of toast */
 .toast.success .toast-icon {
     color: var(--success-color);
 }
@@ -48,26 +54,30 @@
     color: var(--primary-color);
 }
 
+/* Content container inside toast (text part) */
 .toast-content {
-    flex: 1;
+    flex: 1; /* Fill the remaining space */
 }
 
+/* Bold title line in the toast */
 .toast-title {
     font-weight: 600;
     font-size: 0.875rem;
     margin-bottom: 0.25rem;
 }
 
+/* Secondary message line */
 .toast-message {
     font-size: 0.8125rem;
     color: var(--muted-color);
 }
 
+/* Close (X) button on the right */
 .toast-close {
-    color: var(--muted-color);
+    color: var(--muted-color);               /* Light color */
     background: none;
     border: none;
-    cursor: pointer;
+    cursor: pointer;                         /* Show pointer on hover */
     font-size: 1rem;
     padding: 0.25rem;
     display: flex;
@@ -77,44 +87,45 @@
     transition: all 0.2s ease;
 }
 
+/* Hover effect for close button */
 .toast-close:hover {
-    color: var(--text-color);
-    background-color: var(--icon-hover-bg);
+    color: var(--text-color);                /* Darker color on hover */
+    background-color: var(--icon-hover-bg);  /* Light background on hover */
 }
 
+/* Slide in from the right animation */
 @keyframes slideInRight {
     from {
-        transform: translateX(100%);
+        transform: translateX(100%);  /* Start off-screen to the right */
         opacity: 0;
     }
-
     to {
-        transform: translateX(0);
+        transform: translateX(0);     /* Slide into position */
         opacity: 1;
     }
 }
 
+/* Fade out and move up slightly animation */
 @keyframes fadeOut {
     from {
         opacity: 1;
     }
-
     to {
         opacity: 0;
-        transform: translateY(-10px);
+        transform: translateY(-10px); /* Move up a bit as it fades out */
     }
 }
 
-/* Responsive adjustments for toast */
+/* Adjustments for small screens (mobile) */
 @media (max-width: 640px) {
     .toast-container {
         left: 1.5rem;
         right: 1.5rem;
-        align-items: center;
+        align-items: center;          /* Center toasts horizontally */
     }
 
     .toast {
         width: 100%;
-        max-width: 100%;
+        max-width: 100%;              /* Full width on small screens */
     }
 }

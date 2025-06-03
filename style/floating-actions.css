@@ -1,43 +1,49 @@
-/* Floating Action Buttons */
+/* Floating Action Buttons Container */
+/* Positions buttons in the top-right corner, stacked vertically with spacing */
 .floating-actions {
-    position: absolute;
-    top: 0.5rem;
-    right: 0.5rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    z-index: 10;
+    position: absolute;            /* Position relative to nearest positioned ancestor */
+    top: 0.5rem;                  /* Small gap from top */
+    right: 0.5rem;                /* Small gap from right */
+    display: flex;                /* Use flexbox */
+    flex-direction: column;       /* Stack buttons vertically */
+    gap: 0.5rem;                  /* Space between buttons */
+    z-index: 10;                 /* Make sure buttons appear on top */
 }
 
+/* Individual Floating Button Styles */
 .floating-btn {
-    width: 2.25rem;
-    height: 2.25rem;
-    border-radius: 0.375rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: var(--floating-btn-bg);
-    box-shadow: var(--floating-btn-shadow);
-    border: 1px solid var(--border-color);
-    cursor: pointer;
-    transition: all 0.2s ease;
-    color: var(--icon-color);
+    width: 2.25rem;               /* Square size */
+    height: 2.25rem;              /* Square size */
+    border-radius: 0.375rem;      /* Rounded corners */
+    display: flex;                /* Center icon inside */
+    align-items: center;          /* Vertically center content */
+    justify-content: center;      /* Horizontally center content */
+    background-color: var(--floating-btn-bg); /* Background color from CSS variable */
+    box-shadow: var(--floating-btn-shadow);   /* Shadow effect */
+    border: 1px solid var(--border-color);    /* Border color */
+    cursor: pointer;             /* Show pointer on hover */
+    transition: all 0.2s ease;   /* Smooth hover animation */
+    color: var(--icon-color);    /* Icon color */
 }
 
+/* Hover effect for all floating buttons */
 .floating-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    color: var(--primary-color);
+    transform: translateY(-2px);  /* Move button slightly up */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Slightly bigger shadow */
+    color: var(--primary-color);  /* Change icon color on hover */
 }
 
+/* Hover color for Format button */
 .floating-btn.format-btn:hover {
-    color: var(--secondary-color);
+    color: var(--secondary-color); /* Different hover color for format button */
 }
 
+/* Hover color for Copy button */
 .floating-btn.copy-btn:hover {
-    color: var(--success-color);
+    color: var(--success-color);  /* Different hover color for copy button */
 }
 
+/* Hover color for Minify button */
 .floating-btn.minify-btn:hover {
-    color: var(--warning-color);
+    color: var(--warning-color);  /* Different hover color for minify button */
 }

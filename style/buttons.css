@@ -1,74 +1,82 @@
-/* Buttons */
+/* Basic styles for all buttons */
 .btn {
-    padding: 0.75rem 1.5rem;
-    border-radius: 0.375rem;
-    font-weight: 500;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    transition: all 0.2s ease;
-    border: none;
-    font-family: inherit;
+    padding: 0.75rem 1.5rem;         /* Space inside button: top/bottom and left/right */
+    border-radius: 0.375rem;          /* Rounded corners */
+    font-weight: 500;                 /* Medium bold text */
+    cursor: pointer;                 /* Show pointer cursor on hover */
+    display: flex;                   /* Use flexbox for layout */
+    align-items: center;             /* Vertically center button content */
+    gap: 0.5rem;                    /* Space between items inside button */
+    transition: all 0.2s ease;       /* Smooth transition on hover */
+    border: none;                   /* No border by default */
+    font-family: inherit;           /* Use parent's font */
 }
 
+/* Primary button style - usually main action */
 .btn-primary {
-    background-color: var(--primary-color);
-    color: white;
+    background-color: var(--primary-color); /* Main brand color */
+    color: white;                          /* White text */
 }
 
+/* Hover effect for primary button */
 .btn-primary:hover {
-    background-color: var(--primary-hover);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    background-color: var(--primary-hover); /* Darker shade when hovered */
+    transform: translateY(-2px);              /* Slightly lift button */
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); /* Shadow for depth */
 }
 
+/* Outline button style - transparent background with border */
 .btn-outline {
-    background-color: transparent;
-    color: var(--text-color);
-    border: 1px solid var(--border-color);
+    background-color: transparent;      /* No background */
+    color: var(--text-color);            /* Normal text color */
+    border: 1px solid var(--border-color); /* Thin border */
 }
 
+/* Hover effect for outline button */
 .btn-outline:hover {
-    background-color: var(--icon-hover-bg);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    background-color: var(--icon-hover-bg); /* Light background on hover */
+    transform: translateY(-2px);              /* Slight lift */
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05); /* Light shadow */
 }
 
+/* Success button style - used for positive actions */
 .btn-success {
-    background-color: var(--success-color);
-    color: white;
+    background-color: var(--success-color); /* Green or success color */
+    color: white;                          /* White text */
 }
 
+/* Hover effect for success button */
 .btn-success:hover {
-    background-color: var(--success-hover);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    background-color: var(--success-hover); /* Darker green on hover */
+    transform: translateY(-2px);              /* Slight lift */
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); /* Shadow */
 }
 
+/* Secondary button style - less prominent */
 .btn-secondary {
-    background-color: var(--secondary-color);
-    color: white;
+    background-color: var(--secondary-color); /* Secondary brand color */
+    color: white;                             /* White text */
 }
 
+/* Hover effect for secondary button */
 .btn-secondary:hover {
-    background-color: var(--secondary-hover);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    background-color: var(--secondary-hover); /* Darker secondary color on hover */
+    transform: translateY(-2px);                /* Slight lift */
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); /* Shadow */
 }
 
-/* Responsive adjustments for buttons */
+/* Responsive styles for small screens (below 640px wide) */
 @media (max-width: 640px) {
     .footer {
-        flex-direction: column;
-        align-items: stretch;
+        flex-direction: column;        /* Stack footer items vertically */
+        align-items: stretch;          /* Stretch items to fill width */
     }
 
     .btn {
-        justify-content: center;
+        justify-content: center;       /* Center button content horizontally */
     }
 
     .section-footer {
-        flex-direction: column;
+        flex-direction: column;        /* Stack section footer items vertically */
     }
 }

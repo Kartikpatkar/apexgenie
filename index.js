@@ -351,17 +351,25 @@ async function loadHTML(id, path) {
 }
 
 window.addEventListener('DOMContentLoaded', () => {
-    // loadHTML('header-container', './components/header.html');
-    loadHTML('footer-container', './components/footer.html');
+    // Load header
+    loadHTML('header-container', './components/header.html').then(() => {
+        // Set header text after it's loaded
+        document.getElementById('title').textContent = CONSTANTS.TITLE;
+        document.getElementById('subtitle').textContent = CONSTANTS.SUBTITLE;
+    });
+
+    // Load footer
+    loadHTML('footer-container', './components/footer.html').then(() => {
+        // Set footer content after it's loaded
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+        document.getElementById('authorDisplay').textContent = CONSTANTS.AUTHOR.name;
+        document.getElementById('copyright').textContent = CONSTANTS.COPYRIGHT;
+        document.getElementById('footerTitle').textContent = CONSTANTS.TITLE;
+        document.getElementById('tagline').textContent = CONSTANTS.TAGLINE;
+
+        document.querySelector('.footer-link.github').href = CONSTANTS.AUTHOR.github;
+        document.querySelector('.footer-link.linkedin').href = CONSTANTS.AUTHOR.linkedin;
+        document.querySelector('.footer-link.trailhead').href = CONSTANTS.AUTHOR.trailhead;
+        document.querySelector('.footer-link.email').href = `mailto:${CONSTANTS.AUTHOR.email}`;
+    });
 });
-
-const githubBtn = document.querySelector('.github-btn');
-if (githubBtn) {
-    githubBtn.addEventListener('mouseenter', () => {
-        githubBtn.style.transform = 'translateY(-2px)';
-    });
-
-    githubBtn.addEventListener('mouseleave', () => {
-        githubBtn.style.transform = '';
-    });
-}

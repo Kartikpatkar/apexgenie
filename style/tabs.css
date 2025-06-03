@@ -1,26 +1,29 @@
-/* Tabs */
+/* Container for all the tab buttons */
 .tabs {
-    display: flex;
-    border-bottom: 1px solid var(--border-color);
-    margin-bottom: 1rem;
+    display: flex;                              /* Arrange tabs in a row */
+    border-bottom: 1px solid var(--border-color); /* Line below the tabs */
+    margin-bottom: 1rem;                        /* Space below tabs */
 }
 
+/* Individual tab button */
 .tab {
-    padding: 0.5rem 1rem;
-    font-weight: 500;
-    cursor: pointer;
-    border-bottom: 2px solid transparent;
-    transition: all 0.2s ease;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
+    padding: 0.5rem 1rem;                       /* Space inside each tab */
+    font-weight: 500;                           /* Medium-bold text */
+    cursor: pointer;                            /* Show pointer on hover */
+    border-bottom: 2px solid transparent;       /* Placeholder for active underline */
+    transition: all 0.2s ease;                  /* Smooth color/border animation */
+    display: flex;                              /* Allow icon + text layout */
+    align-items: center;                        /* Center vertically */
+    gap: 0.5rem;                                /* Space between icon and text */
 }
 
+/* Style for the selected (active) tab */
 .tab.active {
-    border-bottom: 2px solid var(--primary-color);
-    color: var(--primary-color);
+    border-bottom: 2px solid var(--primary-color); /* Colored underline */
+    color: var(--primary-color);                   /* Highlighted text */
 }
 
+/* Style when hovering over a tab (but not active) */
 .tab:hover:not(.active) {
-    border-bottom: 2px solid var(--muted-color);
+    border-bottom: 2px solid var(--muted-color); /* Light underline on hover */
 }

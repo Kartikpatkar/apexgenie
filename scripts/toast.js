@@ -1,22 +1,27 @@
-// toast.js
-
+/**
+ * Shows a temporary notification (toast) message on the screen.
+ * @param {string} title - The title text of the toast.
+ * @param {string} message - The detailed message inside the toast.
+ * @param {string} type - The type of toast: 'success' (default), 'error', or 'info'.
+ */
 export function showToast(title, message, type = 'success') {
+    // Find the container where toasts will be shown
     const toastContainer = document.getElementById('toastContainer');
     if (!toastContainer) {
         console.warn('Toast container element with id "toastContainer" not found.');
-        return;
+        return;  // If container is missing, stop the function
     }
 
-    // Create toast element
+    // Create a new div element for the toast
     const toast = document.createElement('div');
-    toast.className = `toast ${type}`;
+    toast.className = `toast ${type}`; // Add CSS classes based on toast type
 
-    // Set icon based on type
-    let iconClass = 'fa-check-circle';
+    // Choose icon based on the toast type
+    let iconClass = 'fa-check-circle';  // Default success icon
     if (type === 'error') iconClass = 'fa-exclamation-circle';
     if (type === 'info') iconClass = 'fa-info-circle';
 
-    // Create toast content
+    // Set the inner HTML of the toast with icon, title, message, and close button
     toast.innerHTML = `
         <i class="fas ${iconClass} toast-icon"></i>
         <div class="toast-content">
@@ -28,25 +33,26 @@ export function showToast(title, message, type = 'success') {
         </button>
     `;
 
-    // Add to container
+    // Add the toast element to the container so it becomes visible
     toastContainer.appendChild(toast);
 
-    // Add close functionality
+    // Find the close button inside the toast
     const closeBtn = toast.querySelector('.toast-close');
+    // When user clicks the close button, fade out and remove the toast
     closeBtn.addEventListener('click', () => {
-        toast.style.animation = 'fadeOut 0.3s ease forwards';
+        toast.style.animation = 'fadeOut 0.3s ease forwards';  // start fade out animation
         setTimeout(() => {
-            toastContainer.removeChild(toast);
-        }, 300);
+            toastContainer.removeChild(toast);  // remove toast from DOM after animation
+        }, 300); // wait for animation to finish before removing
     });
 
-    // Auto remove after 3 seconds
+    // Automatically remove the toast after 3 seconds if not closed already
     setTimeout(() => {
-        if (toast.parentNode === toastContainer) {
-            toast.style.animation = 'fadeOut 0.3s ease forwards';
+        if (toast.parentNode === toastContainer) {  // check if toast is still visible
+            toast.style.animation = 'fadeOut 0.3s ease forwards';  // fade out animation
             setTimeout(() => {
                 if (toast.parentNode === toastContainer) {
-                    toastContainer.removeChild(toast);
+                    toastContainer.removeChild(toast);  // remove after animation
                 }
             }, 300);
         }

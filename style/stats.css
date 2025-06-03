@@ -1,106 +1,117 @@
-/* Stats Toggle Button */
+/* Toggle button that shows/hides JSON stats */
 .stats-toggle-btn {
-    background-color: var(--primary-color);
-    border: 1px solid var(--border-color);
-    color: white;
-    cursor: pointer;
-    font-size: 0.75rem;
-    display: flex;
-    align-items: center;
-    gap: 0.375rem;
-    padding: 0.25rem 0.5rem;
-    border-radius: 0.25rem;
-    transition: all 0.2s ease;
-    font-weight: 500;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-    height: 1.75rem;
+    background-color: var(--primary-color); /* Main color for button */
+    border: 1px solid var(--border-color);  /* Border around the button */
+    color: white;                           /* Text color */
+    cursor: pointer;                        /* Cursor changes to pointer on hover */
+    font-size: 0.75rem;                     /* Small text size */
+    display: flex;                          /* Use flexbox to align icon and text */
+    align-items: center;                    /* Vertically center contents */
+    gap: 0.375rem;                          /* Space between icon and text */
+    padding: 0.25rem 0.5rem;                /* Inside space (top/bottom, left/right) */
+    border-radius: 0.25rem;                 /* Slightly rounded corners */
+    transition: all 0.2s ease;              /* Smooth hover effect */
+    font-weight: 500;                       /* Medium-bold text */
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);/* Light shadow */
+    height: 1.75rem;                        /* Fixed height */
 }
 
+/* Hover effect for the toggle button */
 .stats-toggle-btn:hover {
-    background-color: var(--primary-hover);
-    transform: translateY(-1px);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+    background-color: var(--primary-hover); /* Slightly darker on hover */
+    transform: translateY(-1px);            /* Slightly move upward on hover */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15); /* Bigger shadow on hover */
 }
 
+/* Style when the button is in "active" state */
 .stats-toggle-btn.active {
-    background-color: var(--error-color);
-    color: white;
+    background-color: var(--error-color); /* Red background for active */
+    color: white;                         /* White text */
 }
 
+/* Hover effect for the active button */
 .stats-toggle-btn.active:hover {
-    background-color: var(--error-hover);
+    background-color: var(--error-hover); /* Darker red on hover */
 }
 
-/* JSON Stats Section */
+/* Container for the JSON statistics */
 .json-stats-section {
-    background-color: var(--card-bg);
-    border: 1px solid var(--border-color);
-    border-radius: 0.375rem;
-    padding: 0.75rem;
-    margin-top: 0.75rem;
-    margin-bottom: 0.75rem;
-    display: none;
-    position: relative;
+    background-color: var(--card-bg);         /* Same as other sections */
+    border: 1px solid var(--border-color);    /* Standard border */
+    border-radius: 0.375rem;                  /* Rounded corners */
+    padding: 0.75rem;                         /* Space inside the section */
+    margin-top: 0.75rem;                      /* Space above */
+    margin-bottom: 0.75rem;                   /* Space below */
+    display: none;                            /* Hidden by default */
+    position: relative;                       /* Allows absolute elements inside */
 }
 
+/* When stats are shown (via JS), show the section with a slide-down animation */
 .json-stats-section.show {
     display: block;
-    animation: slideDown 0.3s ease;
+    animation: slideDown 0.3s ease;           /* Smooth opening */
 }
 
+/* Header of the stats section */
 .json-stats-header {
-    font-size: 0.875rem;
-    font-weight: 600;
-    margin-bottom: 0.75rem;
-    color: var(--text-color);
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding-bottom: 0.5rem;
-    border-bottom: 1px solid var(--border-color);
+    font-size: 0.875rem;                      /* Medium-small text */
+    font-weight: 600;                         /* Semi-bold */
+    margin-bottom: 0.75rem;                   /* Space below header */
+    color: var(--text-color);                 /* Main text color */
+    display: flex;                            /* Flex layout for icon + text */
+    align-items: center;                      /* Vertically center content */
+    gap: 0.5rem;                              /* Space between icon and title */
+    padding-bottom: 0.5rem;                   /* Padding below title */
+    border-bottom: 1px solid var(--border-color); /* Separator line */
 }
 
+/* Grid layout for displaying multiple stat items */
 .json-stats-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
+    display: flex;            /* Use flexbox */
+    flex-wrap: wrap;          /* Allow items to wrap onto the next line */
+    gap: 0.5rem;              /* Space between items */
 }
 
+/* Each individual stat badge */
 .stat-item {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.25rem;
-    padding: 0.25rem 0.5rem;
-    border-radius: 0.25rem;
-    background-color: var(--bg-color);
-    border: 1px solid var(--border-color);
-    font-size: 0.75rem;
+    display: inline-flex;                  /* Align icon and text in a row */
+    align-items: center;                   /* Vertically center */
+    gap: 0.25rem;                          /* Small gap between icon and value */
+    padding: 0.25rem 0.5rem;               /* Padding inside the badge */
+    border-radius: 0.25rem;                /* Rounded corners */
+    background-color: var(--bg-color);     /* Light background */
+    border: 1px solid var(--border-color); /* Subtle border */
+    font-size: 0.75rem;                    /* Small text */
 }
 
+/* Icon inside a stat badge */
 .stat-icon {
-    color: var(--primary-color);
-    font-size: 0.75rem;
+    color: var(--primary-color);           /* Make icon match primary color */
+    font-size: 0.75rem;                    /* Keep it small */
 }
 
+/* The value shown inside a stat */
 .stat-value {
-    font-weight: 600;
+    font-weight: 600;                      /* Slightly bold for emphasis */
 }
 
+/* The label text after the value (e.g., "keys", "strings") */
 .stat-label {
-    color: var(--muted-color);
-    margin-left: 0.125rem;
+    color: var(--muted-color);             /* Lighter color for less emphasis */
+    margin-left: 0.125rem;                 /* Tiny space after the value */
 }
 
-/* Stats Categories */
+/* Container for a group/category of related stats */
 .stats-category {
-    margin-bottom: 0.75rem;
+    margin-bottom: 0.75rem;                /* Space between categories */
 }
 
+/* Category title (like "JSON Info", "Errors") */
 .stats-category-title {
-    font-size: 0.75rem;
-    font-weight: 600;
-    margin-bottom: 0.5rem;
-    color: var(--muted-color);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
+    font-size: 0.75rem;                    /* Small uppercase label */
+    font-weight: 600;                      /* Semi-bold */
+    margin-bottom: 0.5rem;                 /* Space below title */
+    color: var(--muted-color);             /* Muted color */
+    text-transform: uppercase;             /* Make all letters uppercase */
+    letter-spacing: 0.05em;                /* Slight spacing between letters */
 }

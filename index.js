@@ -314,7 +314,7 @@ require(['vs/editor/editor.main'], function () {
         }
     });
 
-    
+
     document.getElementById('copyJsonStats').addEventListener('click', () => {
         const stats = {
             keyCount: document.getElementById('keyCount').textContent,
@@ -335,3 +335,33 @@ require(['vs/editor/editor.main'], function () {
     });
 
 });
+
+async function loadHTML(id, path) {
+    const container = document.getElementById(id);
+    if (!container) return;
+
+    try {
+        const res = await fetch(path);
+        if (!res.ok) throw new Error(`Failed to load ${path}`);
+        const html = await res.text();
+        container.innerHTML = html;
+    } catch (err) {
+        console.error(err);
+    }
+}
+
+window.addEventListener('DOMContentLoaded', () => {
+    // loadHTML('header-container', './components/header.html');
+    loadHTML('footer-container', './components/footer.html');
+});
+
+const githubBtn = document.querySelector('.github-btn');
+if (githubBtn) {
+    githubBtn.addEventListener('mouseenter', () => {
+        githubBtn.style.transform = 'translateY(-2px)';
+    });
+
+    githubBtn.addEventListener('mouseleave', () => {
+        githubBtn.style.transform = '';
+    });
+}

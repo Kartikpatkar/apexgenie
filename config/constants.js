@@ -11,6 +11,7 @@ export const JSON_INPUT_CONFIG = {
     language: 'json',
     automaticLayout: true,
     theme: MONACO_LIGHT_THEME,
+    scrollBeyondLastLine: false, 
 }
 export const APEX_OUTPUT_CONFIG = {
     value: '',
@@ -19,6 +20,7 @@ export const APEX_OUTPUT_CONFIG = {
     automaticLayout: true,
     theme: MONACO_LIGHT_THEME,
     lineNumbers: 'off',
+    scrollBeyondLastLine: false, 
 }
 export const TEST_APEX_OUTPUT_CONFIG = {
     value: '',
@@ -27,6 +29,7 @@ export const TEST_APEX_OUTPUT_CONFIG = {
     automaticLayout: true,
     theme: MONACO_LIGHT_THEME,
     lineNumbers: 'off',
+    scrollBeyondLastLine: false, 
 }
 
 // CSS class constants

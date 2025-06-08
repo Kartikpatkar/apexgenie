@@ -41,6 +41,22 @@ ApexGenie is a powerful Chrome Extension designed specifically for Salesforce de
 
 ---
 
+## 📸 Screenshots
+
+### 🔹 JSON Input & Apex Output
+
+![Editor Screenshot](assets/screenshots/screenshot-editor.png)
+
+### 🔹 Code Customization Options
+
+![Customization Screenshot](assets/screenshots/screenshot-customization.png)
+
+### 🔹 Dark Mode UI
+
+![Dark Mode Screenshot](assets/screenshots/screenshot-darkmode.png)
+
+---
+
 ## 📦 Installation
 
 ### ✅ Option 1: [Chrome Web Store (Coming Soon)](#)
@@ -106,6 +122,13 @@ Until it's available in the Chrome Web Store, you can load ApexGenie manually fo
 
 ---
 
+## 🧠 Author Info
+
+Built by **Kartik Patkar**  
+🔗 [GitHub](https://github.com/Kartikpatkar) • [LinkedIn](https://linkedin.com/in/kartik-patkar) • [Trailhead](https://www.salesforce.com/trailblazer/kpatkar1)
+
+---
+
 ## 🤝 Contributing
 
 Contributions, issues, and feature requests are welcome!  
@@ -123,18 +146,3 @@ This project is licensed under the MIT License – see the [LICENSE](LICENSE) fi
 
 > Built for Salesforce developers, by Salesforce developers.  
 > ApexGenie helps you write better Apex, faster!
-
-## 📸 Screenshots
-
-### 🔹 JSON Input & Apex Output
-
-![Editor Screenshot](assets/screenshots/screenshot-editor.png)
-
-### 🔹 Code Customization Options
-
-![Customization Screenshot](assets/screenshots/screenshot-customization.png)
-
-### 🔹 Dark Mode UI
-
-![Dark Mode Screenshot](assets/screenshots/screenshot-darkmode.png)
-

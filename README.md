@@ -57,8 +57,7 @@ ApexGenie is a powerful Chrome Extension designed specifically for Salesforce de
 ## 📦 Installation
 
 ### ✅ Option 1: [Chrome Web Store](#)
-<!--> Stay tuned! ApexGenie will soon be available on the Chrome Web Store for one-click installation.
-<!--
+<!-- Stay tuned! ApexGenie will soon be available on the Chrome Web Store for one-click installation.
 Once published, replace the above with:-->
 [Install from Chrome Web Store](https://chromewebstore.google.com/detail/apexgenie-json-to-apex-co/ifliljlnfdnmagdgmomglfoimjcnpinb)
 

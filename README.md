@@ -2,12 +2,9 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)  
 [![Version](https://img.shields.io/badge/Version-1.0.0-blue.svg)](https://github.com/Kartikpatkar/apexgenie) 
-
-**Coming soon to the [Chrome Web Store](#)** 🚀
+<!--**Coming soon to the [Chrome Web Store](#)** 🚀
 <!-- Update with real link once published -->
-<!--
-[![Chrome Web Store](https://img.shields.io/chrome-web-store/v/your-extension-id.svg?label=Chrome%20Web%20Store)](https://chrome.google.com/webstore/detail/your-extension-id)
--->
+[![Chrome Web Store](https://img.shields.io/chrome-web-store/v/ifliljlnfdnmagdgmomglfoimjcnpinb.svg?label=Chrome%20Web%20Store)](https://chromewebstore.google.com/detail/apexgenie-json-to-apex-co/ifliljlnfdnmagdgmomglfoimjcnpinb)
 
 Transform your JSON into Salesforce-ready Apex classes and comprehensive test classes instantly with ApexGenie!
 
@@ -59,14 +56,11 @@ ApexGenie is a powerful Chrome Extension designed specifically for Salesforce de
 
 ## 📦 Installation
 
-### ✅ Option 1: [Chrome Web Store (Coming Soon)](#)
-
-> Stay tuned! ApexGenie will soon be available on the Chrome Web Store for one-click installation.
-
+### ✅ Option 1: [Chrome Web Store](#)
+<!--> Stay tuned! ApexGenie will soon be available on the Chrome Web Store for one-click installation.
 <!--
-Once published, replace the above with:
-[Install from Chrome Web Store](https://chrome.google.com/webstore/detail/your-extension-id)
--->
+Once published, replace the above with:-->
+[Install from Chrome Web Store](https://chromewebstore.google.com/detail/apexgenie-json-to-apex-co/ifliljlnfdnmagdgmomglfoimjcnpinb)
 
 ### 🔧 Option 2: Load ApexGenie Manually in Chrome
 

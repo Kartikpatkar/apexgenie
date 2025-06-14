@@ -1,10 +1,12 @@
 # ApexGenie – JSON to Apex Converter for Salesforce Developers 🧙‍♂️
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)  
-[![Version](https://img.shields.io/badge/Version-1.0.0-blue.svg)](https://github.com/Kartikpatkar/apexgenie) 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)   
+[![Version](https://img.shields.io/badge/Version-1.0.0-blue.svg)](https://github.com/Kartikpatkar/apexgenie)   
+[![Chrome Web Store](https://img.shields.io/chrome-web-store/v/ifliljlnfdnmagdgmomglfoimjcnpinb?label=Chrome%20Web%20Store&logo=google-chrome)](https://chromewebstore.google.com/detail/apexgenie-json-to-apex-co/ifliljlnfdnmagdgmomglfoimjcnpinb)
+
 <!--**Coming soon to the [Chrome Web Store](#)** 🚀
-<!-- Update with real link once published -->
-[![Chrome Web Store](https://img.shields.io/chrome-web-store/v/ifliljlnfdnmagdgmomglfoimjcnpinb.svg?label=Chrome%20Web%20Store)](https://chromewebstore.google.com/detail/apexgenie-json-to-apex-co/ifliljlnfdnmagdgmomglfoimjcnpinb)
+<!-- Update with real link once published
+[![Chrome Web Store](https://img.shields.io/chrome-web-store/v/ifliljlnfdnmagdgmomglfoimjcnpinb.svg?label=Chrome%20Web%20Store)](https://chromewebstore.google.com/detail/apexgenie-json-to-apex-co/ifliljlnfdnmagdgmomglfoimjcnpinb)-->
 
 Transform your JSON into Salesforce-ready Apex classes and comprehensive test classes instantly with ApexGenie!
 
@@ -57,9 +59,17 @@ ApexGenie is a powerful Chrome Extension designed specifically for Salesforce de
 ## 📦 Installation
 
 ### ✅ Option 1: [Chrome Web Store](#)
-<!-- Stay tuned! ApexGenie will soon be available on the Chrome Web Store for one-click installation.
-Once published, replace the above with:-->
-[Install from Chrome Web Store](https://chromewebstore.google.com/detail/apexgenie-json-to-apex-co/ifliljlnfdnmagdgmomglfoimjcnpinb)
+
+You can install **JSON to Apex Genie** directly from the Chrome Web Store:
+
+👉 [Install from Chrome Web Store](https://chrome.google.com/webstore/detail/json-to-apex-genie/ifliljlnfdnmagdgmomglfoimjcnpinb)
+
+Once installed:
+- Click the extension icon in your browser toolbar
+- Paste your JSON
+- Instantly generate Apex classes with options for class name, type visibility, and formatting
+
+> ✅ No login or setup required. Works 100% offline.
 
 ### 🔧 Option 2: Load ApexGenie Manually in Chrome
 
